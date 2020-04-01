@@ -11,11 +11,6 @@ namespace Books.GraphQL {
         {
             Name = "Subscription";
             AddField(resolver.GetService<AuthorAddedSubscription>());
-            // AddField(new EventStreamFieldType{
-            //     Name = "authorAdded",
-            //     Type = typeof(Author),
-
-            // });
         }
     }
 }
