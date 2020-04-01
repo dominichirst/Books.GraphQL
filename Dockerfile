@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY *.sln .
-COPY Books.GraphQL/*.csproj Books.GraphQL/
 RUN dotnet restore
 COPY . .
 
