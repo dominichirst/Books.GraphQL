@@ -11,6 +11,7 @@ namespace Books.GraphQL {
         {
             Name = "Subscription";
             AddField(resolver.GetService<AuthorAddedSubscription>());
+            
         }
     }
 }
