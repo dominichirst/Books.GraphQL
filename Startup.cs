@@ -66,6 +66,7 @@ namespace Books.GraphQL
             {
                 endpoints.MapControllers();
             });
+            
             app.UseWebSockets();
             app.UseGraphQLWebSockets<BooksSchema>("/graphql");
             app.UseGraphQL<BooksSchema>();
