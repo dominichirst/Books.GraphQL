@@ -12,6 +12,7 @@ using GraphQL.Server.Ui.Playground;
 using Books.GraphQL.DbContexts;
 using Books.GraphQL.Services;
 using Books.GraphQL.Subscriptions;
+using Npgsql;
 
 namespace Books.GraphQL
 {
@@ -31,7 +32,21 @@ namespace Books.GraphQL
 
             services.AddDbContext<BooksContext>(options =>
             {
-                options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"));
+                var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                var databaseUri = new Uri(databaseUrl);
+                var userInfo = databaseUri.UserInfo.Split(':');
+
+                var builder = new NpgsqlConnectionStringBuilder
+                {
+                    Host = databaseUri.Host,
+                    Port = databaseUri.Port,
+                    Username = userInfo[0],
+                    Password = userInfo[1],
+                    Database = databaseUri.LocalPath.TrimStart('/')
+                };
+
+                var connectionString =  builder.ToString();
+                options.UseNpgsql(connectionString);
             });
 
             services.AddSingleton<IAuthorMessageService, AuthorMessageService>();
