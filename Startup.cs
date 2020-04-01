@@ -31,7 +31,7 @@ namespace Books.GraphQL
 
             services.AddDbContext<BooksContext>(options =>
             {
-                options.UseSqlServer(Environment.GetEnvironmentVariable("BookDBConnection"));
+                options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"));
             });
 
             services.AddSingleton<IAuthorMessageService, AuthorMessageService>();
@@ -66,7 +66,7 @@ namespace Books.GraphQL
             {
                 endpoints.MapControllers();
             });
-            
+
             app.UseWebSockets();
             app.UseGraphQLWebSockets<BooksSchema>("/graphql");
             app.UseGraphQL<BooksSchema>();
