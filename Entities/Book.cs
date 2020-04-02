@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Books.GraphQL.Entities
 {
-    [Table("Author")] 
+    [Table("Book")] 
     public class Book
     {
         [Key]
