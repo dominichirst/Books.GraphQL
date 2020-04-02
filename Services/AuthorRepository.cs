@@ -21,7 +21,7 @@ namespace Books.GraphQL.Services
         {
             return await _context.Authors.ToListAsync();
         }
-        
+
         public async Task<Author> GetAuthorAsync(int id)
         {
             return await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
@@ -48,11 +48,11 @@ namespace Books.GraphQL.Services
             return author;
         }
 
-         public async Task<ILookup<int, Author>> GetForBooks(IEnumerable<int> authorIds)
+        public async Task<IDictionary<int, Author>> GetForBooks(IEnumerable<int> authorsIds)
         {
-            var authors = await _context.Authors.Where(b => authorIds.Contains(b.Id)).ToListAsync();
+            var author = await _context.Authors.Where(a => authorsIds.Contains(a.Id)).ToDictionaryAsync(a => a.Id);
 
-            return authors.ToLookup(b => b.Id);
+            return author;
         }
     }
 }

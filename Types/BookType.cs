@@ -19,7 +19,7 @@ namespace Books.GraphQL.Types
 
              Field<AuthorType>("author", resolve: context =>
             {
-                var loader = dataLoaderAccessor.Context.GetOrAddCollectionBatchLoader<int, Author>(
+                var loader = dataLoaderAccessor.Context.GetOrAddBatchLoader<int, Author>(
                     "GetAuthorByAuthorId", authorRepository.GetForBooks);
 
                 return loader.LoadAsync(context.Source.AuthorId);

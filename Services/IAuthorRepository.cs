@@ -13,6 +13,6 @@ namespace Books.GraphQL.Services
         Task<Author> UpdateAuthorAsync(Author author);
         Task<Author> DeleteAuthorAsync(Author author);
 
-        Task<ILookup<int, Author>> GetForBooks(IEnumerable<int> booksIds);
+        Task<IDictionary<int, Author>> GetForBooks(IEnumerable<int> authorIds);
     }
 }
