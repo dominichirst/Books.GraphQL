@@ -47,8 +47,17 @@ namespace Books.GraphQL
                 options.UseNpgsql(connectionString);
             });
 
+             //Subscriptions
             services.AddSingleton<IAuthorMessageService, AuthorMessageService>();
+            services.AddSingleton<IBookMessageService, BookMessageService>();
             services.AddSingleton<AuthorAddedSubscription>();
+            services.AddSingleton<AuthorUpdatedSubscription>();
+            services.AddSingleton<AuthorDeletedSubscription>();
+            services.AddSingleton<BookAddedSubscription>();
+            services.AddSingleton<BookUpdatedSubscription>();
+            services.AddSingleton<BookDeletedSubscription>();
+
+
             services.AddScoped<IServiceProvider>(s => new FuncServiceProvider(s.GetRequiredService));
             services.AddScoped<BooksSchema>();
 

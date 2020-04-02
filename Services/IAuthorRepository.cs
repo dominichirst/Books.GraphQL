@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Books.GraphQL.Entities;
+using System.Linq;
 
 namespace Books.GraphQL.Services
 {
@@ -11,5 +12,7 @@ namespace Books.GraphQL.Services
         Task<Author> AddAuthorAsync(Author author);
         Task<Author> UpdateAuthorAsync(Author author);
         Task<Author> DeleteAuthorAsync(Author author);
+
+        Task<ILookup<int, Author>> GetForBooks(IEnumerable<int> booksIds);
     }
 }

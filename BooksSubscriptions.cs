@@ -11,7 +11,11 @@ namespace Books.GraphQL {
         {
             Name = "Subscription";
             AddField(resolver.GetService<AuthorAddedSubscription>());
-            
+            AddField(resolver.GetService<AuthorUpdatedSubscription>());
+            AddField(resolver.GetService<AuthorDeletedSubscription>());
+            AddField(resolver.GetService<BookAddedSubscription>());
+            AddField(resolver.GetService<BookUpdatedSubscription>());
+            AddField(resolver.GetService<BookDeletedSubscription>());
         }
     }
 }

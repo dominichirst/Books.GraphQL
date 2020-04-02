@@ -47,5 +47,12 @@ namespace Books.GraphQL.Services
             await _context.SaveChangesAsync();
             return author;
         }
+
+         public async Task<ILookup<int, Author>> GetForBooks(IEnumerable<int> authorIds)
+        {
+            var authors = await _context.Authors.Where(b => authorIds.Contains(b.Id)).ToListAsync();
+
+            return authors.ToLookup(b => b.Id);
+        }
     }
 }

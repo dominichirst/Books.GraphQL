@@ -10,6 +10,11 @@ namespace Books.GraphQL {
     {
         Author AddAuthorMessage(Author author);
         IObservable<Author> GetAuthorAddedMessages();
+        Author UpdateAuthorMessage(Author author);
+        IObservable<Author> GetAuthorUpdatedMessages();
+
+        Author DeleteAuthorMessage(Author author);
+        IObservable<Author> GetAuthorDeletedMessages();
 
     }
 }
