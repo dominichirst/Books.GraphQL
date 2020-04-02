@@ -46,7 +46,7 @@ namespace Books.GraphQL.Services
 
         public async Task<ILookup<int, Book>> GetForAuthors(IEnumerable<int> authorsIds)
         {
-            var books = await _context.Books.Where(b => authorsIds.Contains(b.Id)).ToListAsync();
+            var books = await _context.Books.Where(b => authorsIds.Contains(b.AuthorId)).ToListAsync();
 
             return books.ToLookup(b => b.Id);
         }
