@@ -28,8 +28,6 @@ namespace Books.GraphQL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddDbContext<BooksContext>(options =>
             {
                 var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
@@ -45,7 +43,7 @@ namespace Books.GraphQL
                     Database = databaseUri.LocalPath.TrimStart('/')
                 };
 
-                var connectionString =  builder.ToString();
+                var connectionString = builder.ToString();
                 options.UseNpgsql(connectionString);
             });
 
@@ -57,31 +55,15 @@ namespace Books.GraphQL
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddGraphQL(o => o.ExposeExceptions = true)
+                    .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
                     .AddWebSockets()
-                    .AddGraphTypes(ServiceLifetime.Scoped)
                     .AddDataLoader()
-                    .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { });
+                    .AddGraphTypes(ServiceLifetime.Scoped);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
             app.UseWebSockets();
             app.UseGraphQLWebSockets<BooksSchema>("/graphql");
             app.UseGraphQL<BooksSchema>();

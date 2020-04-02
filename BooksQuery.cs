@@ -16,7 +16,7 @@ namespace Books.GraphQL
 
             Field<AuthorType>(
             "author",
-             arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+             arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
             resolve: context =>
             {
                 var id = context.GetArgument<int>("id");
@@ -29,7 +29,7 @@ namespace Books.GraphQL
 
             Field<BookType>(
                "book",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
                resolve: context =>
                {
                    var id = context.GetArgument<int>("id");
