@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Books.GraphQL.Entities
 {
+    [Table("Author")] 
     public class Author
     {
         [Key]
