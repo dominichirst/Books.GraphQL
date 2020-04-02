@@ -48,7 +48,7 @@ namespace Books.GraphQL.Services
         {
             var books = await _context.Books.Where(b => authorsIds.Contains(b.AuthorId)).ToListAsync();
 
-            return books.ToLookup(b => b.Id);
+            return books.ToLookup(b => b.AuthorId);
         }
     }
 }
