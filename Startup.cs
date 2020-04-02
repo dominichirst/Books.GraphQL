@@ -42,10 +42,9 @@ namespace Books.GraphQL
                     Password = userInfo[1],
                     Database = databaseUri.LocalPath.TrimStart('/')
                 };
-
                 var connectionString = builder.ToString();
                 options.UseNpgsql(connectionString);
-            });
+            }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
              //Subscriptions
             services.AddSingleton<IAuthorMessageService, AuthorMessageService>();
